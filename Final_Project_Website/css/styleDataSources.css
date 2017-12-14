@@ -1,0 +1,118 @@
+body {
+    background-image: url("../images/CoverImage.jpg");
+    background-size: cover;
+		 background-attachment: fixed;
+    /* background-repeat: no-repeat; */
+	  -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  font-family: "Times New Roman", Times, serif;
+}
+
+h1{
+   font-size: 210%;
+   top: -10px;
+}
+.CoverTitle {
+	position: absolute;
+	top: 2%;
+	left: 15%;
+	width: 1000px;
+	height: 125px;
+	text-align: center;
+	font-family: "Times New Roman", Times, serif;
+
+}
+.relative {
+    position: relative;
+    left: 0px;
+	font-size: 250%;
+}
+
+.relative1 {
+    position: relative;
+    left: 0px;
+}
+.DataDescription {
+	position: absolute;
+	left: 15%;
+	top: 20%;
+	background-color: #FAFAD2;
+	width: 1000px;
+	height: 700px;
+	text-align: center;
+	border: 1px solid black;
+    padding: 15px 15px 15px 15px;
+	;
+}
+.Dataheader {
+  position: relative;
+  left:-350px;
+  font-size: 150%;
+}
+.firstlink {
+	font-size: 120%;
+	position: relative;
+	left: -100px;
+}
+.secondlink {
+	font-size: 120%;
+	position: relative;
+	left: -17px;
+}
+.thirdlink {
+	font-size: 120%;
+	position: relative;
+	left: 59px;
+}
+
+.dataintro {
+	position:relative;
+	top:40px;
+	font-size: 120%;
+}
+#t01 {	 
+    width: 25%;    
+    background-color: #F0F8FF;
+    border: 1px solid black;
+		position:relative;
+	top:60px;
+	left: 40px;
+}
+#t02 {	 
+    width: 25%;    
+    background-color: #F0F8FF;
+    border: 1px solid black;
+		position:relative;
+	top:-212px;
+	left:350px;
+}
+#t03 {	 
+    width: 25%;    
+    background-color: #F0F8FF;
+    border: 1px solid black;
+		position:relative;
+	top:-604px;
+	left:670px;
+}
+td {
+    padding: 5px;
+    text-align: middle;
+}
+th {
+    padding: 5px;
+    text-align: center;
+	border-bottom: 1px solid black;
+}
+h4 {
+   font-size: 150%;
+}
+
+h3{
+font-size: 120%;
+}
+
+a{
+	color: darkblue;
+}

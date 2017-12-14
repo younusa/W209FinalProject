@@ -1,0 +1,112 @@
+body {
+	background-image: url("../images/CoverImage.jpg");
+    background-size: cover;
+    /* background-repeat: no-repeat; */
+		 background-attachment: fixed;
+	  -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+}
+
+h1{ text-shadow: 2px 2px #ff0000;
+	position: absolute;
+	left: 50%;
+}
+
+.relative {
+    /* position: relative; */
+    /* left: 460px; */
+	position: absolute;
+	left: 47%;
+}
+
+.relative1 {
+    position: relative;
+    left: 500px;
+}
+.container {
+	background-color: #FAFAD2;
+	width: 1400px;
+	height: 400px;
+}
+.tableauPlaceholder {
+	position: relative;
+	left: 800px;
+}
+.Nikki {
+	position: relative;
+	left: 100px;
+	top: -300px;
+	height: 300px;
+    width: 350px;
+}
+h2{ position: relative;
+    top: -10px;
+	left: 0px;
+	font-size: 250%;
+}
+#Nikki {
+	position: relative;
+	top: -280px;
+	left: 100px;
+    width: 350px;
+	background-color: #F0F8FF;
+	border-style: solid;
+	border-width: 1px;
+	text-align: center; 
+}
+
+#Chengimage {
+	position: relative;
+	left: 550px;
+	top: -770px;
+}
+.Cheng {
+	height: 300px;
+    width: 350px;
+}
+#Cheng {
+	position: relative;
+	top: -750px;
+	left: 550px;
+    width: 350px;
+	background-color: #F0F8FF;
+	border-style: solid;
+	border-width: 1px;
+	text-align: center;
+}
+h3{ position: relative;
+    top: -10px;
+	left: 0px;
+	font-size: 250%;
+}
+
+#Younusimage {
+	position: relative;
+	left: 980px;
+	top: -1220px;
+}
+.Younus {
+	height: 300px;
+    width: 350px;
+}
+#Younus {
+	position: relative;
+	top: -1200px;
+	left: 980px;
+    width: 350px;
+	background-color: #F0F8FF;
+	border-style: solid;
+	border-width: 1px;
+	text-align: center;
+}
+
+h4{ position: relative;
+	left: 0px;
+	font-size: 250%;
+}
+
+a{
+	color: darkblue;
+}

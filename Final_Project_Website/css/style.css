@@ -1,0 +1,87 @@
+body {
+    background-image: url("../images/CoverImage.jpg");
+    background-size: cover;
+		 background-attachment: fixed;
+	/* background-repeat: no-repeat; */
+      -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  font-family: "Times New Roman", Times, serif;
+}
+h1{
+
+}
+.homepage {
+	position: absolute;
+	top: 1%;
+	left: 15%;
+	/* background-color: #FFFAF0; */
+	width: 1000px;
+	height: 100px;
+	text-align: center;
+	font-family: "Times New Roman", Times, serif;
+	/* border: 1px solid black; */
+}
+.relative {
+    position: relative;
+    left: 0px;
+}
+
+.relative1 {
+    position: relative;
+    left: 0px;
+	font-size: 120%;
+}
+.tableaudescription {
+	position: absolute;
+	left: 5%;
+	top: 40%;
+	background-color: #FAFAD2;
+	width: 500px;
+	height: auto;
+	text-align: center;
+	border: 4px solid black;
+    padding: 5px 25px 25px 25px;
+	;
+}
+h4 {
+   font-size: 160%;
+}
+/* .divheader{ */
+	/* text-align: left; */
+	/* font-size: 16px; */
+/* } */
+.firstbullet {
+	text-align: left;
+	font-size: 16px;
+}
+.secondbullet {
+	text-align: left;
+	font-size: 16px;
+}
+.thirdbullet {
+	text-align: left;
+	font-size: 16px;
+}
+
+.details {
+	font-size: 120%;
+}
+
+.tableauPlaceholder {
+	position: absolute;
+	left: 60%;
+	position: relative;
+	top: 190px;
+	border: 2px solid black;
+h4 {
+   font-size: 170%;
+}
+
+h3{
+font-size: 120%;
+}	
+a{
+	color: darkblue;
+}

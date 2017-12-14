@@ -1,0 +1,51 @@
+body {
+    /* background-image: url("../images/CoverImage.jpg"); */
+    background-size: cover;
+	 background-attachment: fixed;
+      -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+    font-family: "Times New Roman", Times, serif;
+}
+
+#search{
+	/* position: absolute; */
+	/* top: 60%;	 */
+}
+.yo {
+	position: absolute;
+	left:-10%;
+	top: -10%;
+	
+}
+.projecttext{
+	position: relative;
+	top: -18px;
+}
+.text{
+	position: relative;
+	top: -50px;
+	left: 300px;
+	background-color: #FAFAD2;
+	width: 800px;
+	height: 120px;
+	border: 1px solid black;
+	padding: 20px 5px 20px 20px;
+	text-align: center;
+}
+
+.SimilarProducts {
+	position: absolute;
+	left: 40%;
+	top: -4%;
+	/* background-color: #FAFAD2; */
+	width: auto;
+	height: auto;
+	text-align: center;
+	/* border: 1px solid black; */
+	font-size: 30px;
+    padding: 20px;
+	    font-family: "Times New Roman", Times, serif;
+	;
+}

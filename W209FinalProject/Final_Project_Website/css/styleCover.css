@@ -1,0 +1,62 @@
+body {
+    background-image: url("../images/CoverImage.jpg");
+    background-size: cover;
+		 background-attachment: fixed;
+      -ms-background-size: cover;
+  -o-background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  font-family: "Times New Roman", Times, serif;
+}
+
+h1{
+   font-size: 210%;
+   top: -10px;
+}
+.CoverTitle {
+	position: absolute;
+	top: 2%;
+	left: 15%;
+	width: 1000px;
+	height: 125px;
+	text-align: center;
+	font-family: "Times New Roman", Times, serif;
+
+}
+.relative {
+    position: relative;
+    left: 0px;
+	font-size: 250%;
+}
+
+.relative1 {
+    position: relative;
+    left: 0px;
+}
+.ProjectDescription {
+	position: absolute;
+	left: 15%;
+	top: 45%;
+	background-color: #FAFAD2;
+	width: 1000px;
+	height: auto;
+	text-align: center;
+	border: 1px solid black;
+    padding: 15px 25px 25px 25px;
+	;
+}
+.details {
+	font-size: 120%;
+}
+
+.projecttext {
+   font-size: 17px;
+}
+
+h4{
+font-size: 25px;
+}
+
+a{
+	color: darkblue;
+}

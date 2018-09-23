@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <title>Similar Products</title>
+</head>
+<body>
+
+<svg id="yo"><div class="text"><p class = 'projecttext'>On this page, you can type in the name of your
+ favorite personal care products and find other products similar in composition.  If you cannot find your favorite product, 
+ it might not be in our dataset; please explore our <a href="homepage.html" style="text-decoration: underline;" ><b>Tableau</b></a> to find another product.  
+When a product is found, its ingredients are compared to every other products’ ingredients in our database.  Then, the ingredients are scored using a 
+<a href="https://en.wikipedia.org/wiki/S%C3%B8rensen%E2%80%93Dice_coefficient" style="text-decoration: underline;" ><b>Similar Measurement</b></a>  and the top 3 products are returned.  
+
+<p>To get started, try typing in “Fructis Classic”.</p>
+</p> </div></svg>
+<div class="SimilarProducts">
+<h4><b> Product Twin Finder</b></h4>  
+
+</div> <!-- tableaudescription -->
+<link rel="stylesheet" href="css/styleSimilarProducts.css">
+    <input id="search" placeholder="Search for item" style="width: 500px" type="text">
+    <div id="results"><p>Stick déo Musk</p></div>   
+    <div id="similar"><p>Similar Products:	Stick Large Intraçable 72h;	Fruit du dragon Anti-transpirant, anti-traces;	Gel à raser</p></div>  
+    <script src="http://d3js.org/d3.v4.min.js"></script>
+    <script>
+        var hash = {};
+    var margin = { top: 40, right: 4, bottom: 40, left: 20 },
+  width = 1400,
+  height = 1000;
+
+var data = [100,200,300];
+
+
+var svgContainer = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height)       
+        .style("fill", "none")
+        .append('g')
+        .attr('transform', 'translate(' + margin.left + ', ' + margin.top + ')');
+
+
+d3.json("data_with_similarity_scores.json", function (err, data) {
+            if (err) throw err;            
+
+            data.forEach(function (d) { 
+                hash[d.id] = d;
+            });
+
+//             console.log(hash[0].product_name );
+
+            d3.select("#search")
+                .on("input", onSearch);
+
+
+            update(data);
+
+            function update(data) {
+                var results = d3.select("#results")
+                    .selectAll("p")
+                    .data(data);
+                results.enter()
+                    .append("p")
+                    .merge(results)
+                    .text(function (d) { return d.product_name; })
+                    .on('click', clickHandler)
+
+                    results.exit()
+                    .remove();
+
+
+            }
+            
+            function clickHandler() {
+            	var selected = d3.select(this).text();
+            	var matched = data.filter(function (d){ 
+                    return d.product_name == selected; 
+                });
+                update(matched);
+                updateSimilar(matched);
+                showText(matched);
+				d3.select("#search").text(function(d) {return d3.select("#search");});
+				document.getElementById('search').value = selected;
+            }
+            
+           function updateSimilar(data) {
+                var results = d3.select("#similar")
+                    .selectAll("p")
+                    .data(data);
+                results.enter()
+                    .append("p")
+                    .merge(results)
+                    .text(function (d) { 
+                    
+                    
+            		//  console.log("hahahha");
+//                      console.log(hash[d.top_scores[0][0]]);
+//                     console.log(hash[d.top_scores[1][0]]);
+                    return "Similar Products:	" + hash[d.top_scores[0][0]].product_name 
+                    + ";	"+ hash[d.top_scores[1][0]].product_name 
+                    + ";	"+ hash[d.top_scores[2][0]].product_name ; 
+
+                    });
+                    results.exit()
+                    .remove();
+
+
+            }
+        
+            
+            var filtered;
+            function onSearch() {
+            	svgContainer.selectAll("rect").remove();
+            	svgContainer.selectAll("text").remove();
+                var search = d3.event.target.value.toUpperCase();
+                filtered = data.filter(function (d){ 
+                    return d.product_name.toUpperCase().startsWith(search); 
+                    //return search;
+                });
+//                 console.dir(filtered);
+				var matched = data.filter(function (d){ 
+                    return d.product_name.toUpperCase() == search; 
+                    //return search;
+                });
+                update(filtered);
+                updateSimilar(filtered);
+                if(matched.length == 1){
+	                showText(matched);
+                }
+            }
+            
+            function showText(data)
+            {          
+            svgContainer.selectAll("rect").remove(); 
+			svgContainer.selectAll("text").remove();  
+            var rect = svgContainer.selectAll("rect")
+                        .data(data)
+                        .enter();
+            
+            // selected product
+            rect.append("rect")
+            .attr("width", 300)
+            .attr("height", 60)
+    		.style("stroke", "black")    // set the line colour
+            .style("fill", "lightYellow");
+
+            rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 20; })
+       		.attr("y", function (d) { return 20; })
+       		.text(function (d) { return "The product you selected: "; })
+       		.call(wrap, 260, 16, 2);
+       		
+       		rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 20; })
+       		.attr("y", function (d) { return 40; })
+       		.text(function (d) { return d.product_name; })
+       		.call(wrap, 260, 16, 2);
+       		
+       		rect.append("rect")
+       		.attr("x", function (d) { return 0; })
+       		.attr("y", function (d) { return 60; })
+            .attr("width", 300)
+            .attr("height", 700)
+    		.style("stroke", "black")    // set the line colour
+            .style("fill", "white");
+            
+             /*rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 20; })
+       		.attr("y", function (d) { return 80; })
+       		.text(function (d) { return "Product type: " + d.product_type; })
+       		.call(wrap, 260, 30, 20);*/
+
+            rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 20; })
+       		.attr("y", function (d) { return 80; })
+       		.text(function (d) { return "Ingredients: " + d.ingredients_text; })
+       		.call(wrap, 260, 30, 20);            
+       		
+       		// product 1
+       		rect.append("rect")
+            .attr("width", 300)
+            .attr("height", 60)
+       		.attr("x", function (d) { return 300; })
+    		.style("stroke", "black")    // set the line colour
+            .style("fill", "lightYellow");
+
+            rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 320; })
+       		.attr("y", function (d) { return 17; })
+       		.text(function (d) { return  "Product1: "+hash[d.top_scores[0][0]].product_name; })
+       		.call(wrap, 260, 16, 2);
+       		
+       		rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 320; })
+       		.attr("y", function (d) { return 48; })
+       		.text(function (d) { return  "Score: " + parseFloat(d.top_scores[0][1]).toFixed(3); });
+       		
+       		rect.append("rect")
+       		.attr("x", function (d) { return 300; })
+       		.attr("y", function (d) { return 60; })
+            .attr("width", 300)
+            .attr("height", 700)
+    		.style("stroke", "black")    // set the line colour
+            .style("fill", "white");
+            /*
+            rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 320; })
+       		.attr("y", function (d) { return 80; })
+       		.text(function (d) { return "Product type: " +  hash[d.top_scores[0][0]].product_type; })
+       		.call(wrap, 260, 30, 20);*/
+            
+             rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 320; })
+       		.attr("y", function (d) { return 80; })
+       		.text(function (d) { return "Ingredients: " +  hash[d.top_scores[0][0]].ingredients_text; })
+       		.call(wrap, 260, 30, 20);
+
+			// product 2
+       		rect.append("rect")
+            .attr("width", 300)
+            .attr("height", 60)
+       		.attr("x", function (d) { return 600; })
+    		.style("stroke", "black")    // set the line colour
+            .style("fill", "lightYellow");
+       		
+            rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 620; })
+       		.attr("y", function (d) { return 17; })
+       		.text(function (d) { return  "Product2: "+hash[d.top_scores[1][0]].product_name; })
+       		.call(wrap, 260, 16, 2);
+       		
+       		rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 620; })
+       		.attr("y", function (d) { return 48; })
+       		.text(function (d) { return  "Score: " + parseFloat(d.top_scores[1][1]).toFixed(3); });
+       		
+       		rect.append("rect")
+       		.attr("x", function (d) { return 600; })
+       		.attr("y", function (d) { return 60; })
+            .attr("width", 300)
+            .attr("height", 700)
+    		.style("stroke", "black")    // set the line colour
+            .style("fill", "white");
+            
+             rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 620; })
+       		.attr("y", function (d) { return 80; })
+       		.text(function (d) { return "Ingredients: " +  hash[d.top_scores[1][0]].ingredients_text; })
+       		.call(wrap, 260, 30, 20);
+       		
+			// product 3
+       		rect.append("rect")
+            .attr("width", 300)
+            .attr("height", 60)
+       		.attr("x", function (d) { return 900; })
+    		.style("stroke", "black")    // set the line colour
+            .style("fill", "lightYellow");
+       		
+            rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 920; })
+       		.attr("y", function (d) { return 17; })
+       		.text(function (d) { return "Product3: "+hash[d.top_scores[2][0]].product_name;  })
+       		.call(wrap, 260, 16, 2);
+       		
+       		rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 920; })
+       		.attr("y", function (d) { return 48; })
+       		.text(function (d) { return "Score: " + parseFloat(d.top_scores[2][1]).toFixed(3);  });
+       		
+       		rect.append("rect")
+       		.attr("x", function (d) { return 900; })
+       		.attr("y", function (d) { return 60; })
+            .attr("width", 300)
+            .attr("height", 700)
+    		.style("stroke", "black")    // set the line colour
+            .style("fill", "white");
+            
+             rect.append("text")
+       		.style("fill", "black")
+       		.style("font-size", "15px")
+       		.attr("x", function (d) { return 920; })
+       		.attr("y", function (d) { return 80; })
+       		.text(function (d) { return "Ingredients: " +  hash[d.top_scores[2][0]].ingredients_text; })
+       		.call(wrap, 260, 30, 20);
+
+            }
+            
+            
+            function wrap(text, width, lineSpace, max) {
+			  text.each(function() {
+				var text = d3.select(this),
+		        words = text.text().split(/\s+/).reverse(),
+        		word,
+		        line = [],
+        		lineNumber = 0,
+		        lineHeight = 1.1, // ems
+		        x = text.attr("x"),
+        		y = text.attr("y"),
+		        dy = parseFloat(text.attr("dy")),
+        		tspan = text.text(null).append("tspan").attr("x", x).attr("y", y);
+			    while (word = words.pop()) {
+			      line.push(word);
+			      tspan.text(line.join(" "));
+			      if (tspan.node().getComputedTextLength() > width) {
+			    	max = max-1;			    	
+			        line.pop();
+			        tspan.text(line.join(" "));
+			        if(max <= 0){
+			    		break;
+			    	}
+			        line = [word];
+					y = parseInt(y) + parseInt(lineSpace);
+			        tspan = text.append("tspan").attr("x", x).attr("y", y).text(word);
+			      }
+			    }
+			  });
+			}
+        })
+
+    </script>
+    
+
+</body></html>
